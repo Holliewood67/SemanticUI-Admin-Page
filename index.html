@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+</head>
+<body>
+    <div class="ui middle aligned center aligned grid">
+        <div class="column four wide">
+            <h1 class="ui header">
+                Login to your account
+            </h1>
+            <form class="ui large form" action="admin.html">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <input type="text" name="email" placeholder="Email">
+                        <i class="user icon"></i>
+                      </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <input type="password" name="password" placeholder="Password">
+                        <i class="keyboard icon"></i>
+                      </div>
+                </div>
+                <div class="field">
+                </div>
+                <button class="ui fluid blue button" type="submit">Login</button>
+                <br>
+                <button class="ui fluid basic button" type="submit">Forgot Password</button>
+                <div class="ui error message"></div>
+              </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var emails = ['example1@gmail.com', 'example2@gmail.com','example3@gmail.com'];
+        var passwords = ['passone', 'passtwo', 'passthree'];
+
+        $.fn.form.settings.rules.isUserValid = function() {
+            var email = $('.ui.form').form('get value', 'email');
+            var password = $('.ui.form').form('get value', 'password');
+
+            for (var i = 0; i < emails.length; i++){
+                console.log(email);
+
+                if (email == emails[i] && password == passwords[i]){
+                    return true
+                } 
+                return false;   
+            }
+        }
+
+        $('.ui.form').form({
+            fields: {
+                username: {
+                    identifier: 'email',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter an email'
+                        },
+                        {
+                            type   : 'isUserValid',
+                            prompt : 'Invalid email and password combination.'
+                        }
+
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter a password'
+                        },
+                    ]
+                },
+        }
+    })
+    ;
+    </script>
+</body>
+</html>
